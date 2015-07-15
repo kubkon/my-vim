@@ -43,7 +43,7 @@ set directory=~/.vim/tmp/swap,.   " keep swap files out of the way
 set ttimeoutlen=50                " speed up O etc in the Terminal
 set virtualedit=block             " allow cursor to move where there is no text in visual block mode
 set showmatch                     " show matching brackets
-set showcmd                       " extra info in command line
+" set showcmd                       " extra info in command line
 set nojoinspaces                  " don't autoinsert two spaces after '.', '?', '!' for join command
 set wildignore+=*.o               " don't offer to autocomplete object files
 
@@ -73,18 +73,30 @@ if !exists('g:airline_symbols')
 endif
 
 " unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
+" let g:airline_symbols.linenr = '␊'
+" let g:airline_symbols.linenr = '␤'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.branch = '⎇'
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.paste = '∥'
+" let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_left_sep = ' '
+let g:airline_left_sep = ' '
+let g:airline_right_sep = ' '
+let g:airline_right_sep = ' '
+let g:airline_symbols.linenr = ' '
+let g:airline_symbols.linenr = ' '
+let g:airline_symbols.linenr = ' '
+let g:airline_symbols.branch = ' '
+let g:airline_symbols.paste = ' '
+let g:airline_symbols.paste = ' '
+let g:airline_symbols.paste = ' '
+let g:airline_symbols.whitespace = ' '
 
 " all languages
 set shiftwidth=2                  " spaces per tab (when shifting)
