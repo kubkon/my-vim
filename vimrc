@@ -1,0 +1,138 @@
+call pathogen#infect()
+call pathogen#helptags()
+
+
+" Fat fingers
+cabbrev Q quit
+cabbrev W write
+cabbrev Wq wq
+
+" Hit return to clear search highlight. Thanks, Zdenek Sekera!
+nnoremap <silent> <CR> :nohlsearch<CR>
+nnoremap <F5> :GundoToggle<CR>
+nnoremap <C-n> :NERDTree<CR>
+vnorem // y/<c-r>"<cr>
+
+" Soft wrap
+set linebreak
+map <down> gj
+map <up> gk
+imap <down> <C-O>gj
+imap <up> <C-O>gk
+set smartindent
+set nolist                        " breaks soft wrap :(
+
+
+" Rest based on http://git.wincent.com/wincent.git/blob_plain/HEAD:/.vimrc
+set nocompatible                  " just in case system-wide vimrc has set this otherwise
+set hlsearch                      " highlight search strings
+set incsearch                     " incremental search ("find as you type")
+set ignorecase                    " ignore case when searching
+set smartcase                     " except when search string includes a capital letter
+set number                        " show line numbers in gutter
+set laststatus=2                  " always show status line
+set ww=h,l,<,>,[,]                " allow h/l/left/right to cross line boundaries
+set autoread                      " if not changed in Vim, automatically pick up changes after "git co" etc
+set guioptions-=T                 " don't show toolbar
+set hidden                        " allows you to hide buffers with unsaved changes without being prompted
+set wildmenu                      " show options as list when switching buffers etc
+set wildmode=longest:full,full    " shell-like autocomplete to unambiguous portion
+set history=1000                  " longer search and command history (default is 20)
+set scrolloff=3                   " start scrolling 3 lines before edge of viewport
+set backupdir=~/.vim/tmp/backup,. " keep backup files out of the way
+set directory=~/.vim/tmp/swap,.   " keep swap files out of the way
+set ttimeoutlen=50                " speed up O etc in the Terminal
+set virtualedit=block             " allow cursor to move where there is no text in visual block mode
+set showmatch                     " show matching brackets
+set showcmd                       " extra info in command line
+set nojoinspaces                  " don't autoinsert two spaces after '.', '?', '!' for join command
+set wildignore+=*.o               " don't offer to autocomplete object files
+
+" statusline
+" cf the default statusline: %<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+" format markers:
+"   %< truncation point
+"   %n buffer number
+"   %f relative path to file
+"   %m modified flag [+] (modified), [-] (unmodifiable) or nothing
+"   %r readonly flag [RO]
+"   %y filetype [ruby]
+"   %= split point for left and right justification
+"   %-35. width specification
+"   %l current line number
+"   %L number of lines in buffer
+"   %c current column number
+"   %V current virtual column number (-n), if different from %c
+"   %P percentage through buffer
+"   %) end of width specification
+set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
+let g:airline#extensions#tabline#enabled = 1
+
+" all languages
+set shiftwidth=2                  " spaces per tab (when shifting)
+set tabstop=2                     " spaces per tab
+set expandtab                     " always use spaces instead of tabs
+set smarttab                      " <tab> key
+set autoindent
+set backspace=indent,eol,start
+
+" Ruby
+autocmd FileType ruby set tabstop=2
+autocmd FileType ruby set shiftwidth=2
+
+" Python
+autocmd FileType python set tabstop=4
+autocmd FileType python set shiftwidth=4
+
+" C
+autocmd FileType c set tabstop=2
+autocmd FileType c set shiftwidth=2
+
+" Objective-C
+let filetype_m='objc'
+autocmd FileType objc set tabstop=2
+autocmd FileType objc set shiftwidth=2
+
+" Go
+autocmd FileType go set noexpandtab
+
+" automatic, language-dependent indentation, syntax coloring and other
+" functionality
+filetype plugin indent on
+syntax on
+
+color molokai
+
+let mapleader=","
+let maplocalleader="\\"
+
+" ,e -- edit file, starting in same directory as current file
+map <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+
+" Fix some weird problem with $PATH mangling
+set shell=/bin/bash
+
+" Haskell specific
+set nofoldenable    " disable folding
+let g:haskell_conceal_enumerations=0
+
+" EasyMotion
+" Bi-directional find motion
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap s <Plug>(easymotion-s)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-s2)
+
+" Turn on case sensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
+" Automatically hide NERDTree after file has been opened
+let NERDTreeQuitOnOpen=1
+
