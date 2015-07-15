@@ -1,7 +1,6 @@
 call pathogen#infect()
 call pathogen#helptags()
 
-
 " Fat fingers
 cabbrev Q quit
 cabbrev W write
@@ -154,4 +153,7 @@ map <Leader>k <Plug>(easymotion-k)
 
 " Automatically hide NERDTree after file has been opened
 let NERDTreeQuitOnOpen=1
+
+" Disable right hand scroll bar
+set guioptions-=r
 
