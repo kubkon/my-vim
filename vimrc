@@ -169,3 +169,6 @@ let NERDTreeQuitOnOpen=1
 " Disable right hand scroll bar
 set guioptions-=r
 
+" Vimtex
+let g:vimtex_quickfix_open_on_warning = 0
+
