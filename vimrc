@@ -38,8 +38,8 @@ set wildmenu                      " show options as list when switching buffers 
 set wildmode=longest:full,full    " shell-like autocomplete to unambiguous portion
 set history=1000                  " longer search and command history (default is 20)
 set scrolloff=3                   " start scrolling 3 lines before edge of viewport
-set backupdir=$TEMP " keep backup files out of the way
-set directory=$TEMP   " keep swap files out of the way
+set backupdir=$TEMP               " keep backup files out of the way
+set directory=$TEMP               " keep swap files out of the way
 set ttimeoutlen=50                " speed up O etc in the Terminal
 set virtualedit=block             " allow cursor to move where there is no text in visual block mode
 set showmatch                     " show matching brackets
@@ -139,9 +139,6 @@ let maplocalleader="\\"
 " ,e -- edit file, starting in same directory as current file
 map <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
-" Fix some weird problem with $PATH mangling
-set shell=/bin/bash
-
 " Haskell specific
 set nofoldenable    " disable folding
 let g:haskell_conceal_enumerations=0
@@ -168,7 +165,4 @@ let NERDTreeQuitOnOpen=1
 
 " Disable right hand scroll bar
 set guioptions-=r
-
-" Vimtex
-let g:vimtex_quickfix_open_on_warning = 0
 
