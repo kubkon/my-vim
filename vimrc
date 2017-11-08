@@ -1,5 +1,3 @@
-" call pathogen#infect()
-" call pathogen#helptags()
 call plug#begin('~/.vim/plugged')
 
 Plug 'rking/ag.vim'
@@ -17,6 +15,7 @@ Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-surround'
 Plug 'lervag/vimtex'
+Plug 'jeetsukumaran/vim-buffergator'
 Plug 'Valloric/YouCompleteMe'
 
 call plug#end()
@@ -87,36 +86,11 @@ set wildignore+=*.o               " don't offer to autocomplete object files
 set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
 
 " Configure airline
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
-
-" unicode symbols
-" let g:airline_left_sep = '»'
-" let g:airline_left_sep = '▶'
-" let g:airline_right_sep = '«'
-" let g:airline_right_sep = '◀'
-" let g:airline_symbols.linenr = '␊'
-" let g:airline_symbols.linenr = '␤'
-" let g:airline_symbols.linenr = '¶'
-" let g:airline_symbols.branch = '⎇'
-" let g:airline_symbols.paste = 'ρ'
-" let g:airline_symbols.paste = 'Þ'
-" let g:airline_symbols.paste = '∥'
-" let g:airline_symbols.whitespace = 'Ξ'
-let g:airline_left_sep = ' '
-let g:airline_left_sep = ' '
-let g:airline_right_sep = ' '
-let g:airline_right_sep = ' '
-let g:airline_symbols.linenr = ' '
-let g:airline_symbols.linenr = ' '
-let g:airline_symbols.linenr = ' '
-let g:airline_symbols.branch = ' '
-let g:airline_symbols.paste = ' '
-let g:airline_symbols.paste = ' '
-let g:airline_symbols.paste = ' '
-let g:airline_symbols.whitespace = ' '
 
 " all languages
 set shiftwidth=2                  " spaces per tab (when shifting)
@@ -125,10 +99,6 @@ set expandtab                     " always use spaces instead of tabs
 set smarttab                      " <tab> key
 set autoindent
 set backspace=indent,eol,start
-
-" Ruby
-autocmd FileType ruby set tabstop=2
-autocmd FileType ruby set shiftwidth=2
 
 " Python
 autocmd FileType python set tabstop=4
@@ -144,14 +114,6 @@ autocmd FileType cpp set shiftwidth=2
 set cindent
 set cinoptions=g0
 
-" Objective-C
-let filetype_m='objc'
-autocmd FileType objc set tabstop=2
-autocmd FileType objc set shiftwidth=2
-
-" Go
-autocmd FileType go set noexpandtab
-
 " automatic, language-dependent indentation, syntax coloring and other
 " functionality
 filetype plugin indent on
@@ -159,7 +121,7 @@ syntax on
 
 color molokai
 
-let mapleader=","
+let mapleader="`"
 let maplocalleader="\\"
 
 " ,e -- edit file, starting in same directory as current file
