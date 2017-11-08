@@ -1,5 +1,25 @@
-call pathogen#infect()
-call pathogen#helptags()
+" call pathogen#infect()
+" call pathogen#helptags()
+call plug#begin('~/.vim/plugged')
+
+Plug 'rking/ag.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'sjl/gundo.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'rust-lang/rust.vim'
+Plug 'tony/tmux-config'
+Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-commentary'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-liquid'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-surround'
+Plug 'lervag/vimtex'
+Plug 'Valloric/YouCompleteMe'
+
+call plug#end()
 
 " Fat fingers
 cabbrev Q quit
@@ -118,6 +138,12 @@ autocmd FileType python set shiftwidth=4
 autocmd FileType c set tabstop=2
 autocmd FileType c set shiftwidth=2
 
+" Cpp
+autocmd FileType cpp set tabstop=2
+autocmd FileType cpp set shiftwidth=2
+set cindent
+set cinoptions=g0
+
 " Objective-C
 let filetype_m='objc'
 autocmd FileType objc set tabstop=2
@@ -171,4 +197,7 @@ set guioptions-=r
 
 " Vimtex
 let g:vimtex_quickfix_open_on_warning = 0
+
+" YCM
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
