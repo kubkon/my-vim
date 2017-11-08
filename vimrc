@@ -16,6 +16,7 @@ Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-surround'
 Plug 'lervag/vimtex'
 Plug 'jeetsukumaran/vim-buffergator'
+Plug 'jiangmiao/auto-pairs'
 Plug 'Valloric/YouCompleteMe'
 
 call plug#end()
