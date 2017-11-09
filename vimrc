@@ -5,15 +5,13 @@ Plug 'kien/ctrlp.vim'
 Plug 'sjl/gundo.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'rust-lang/rust.vim'
-Plug 'tony/tmux-config'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-commentary'
 Plug 'easymotion/vim-easymotion'
-Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-surround'
+Plug 'Konfekt/FastFold'
 Plug 'lervag/vimtex'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'jiangmiao/auto-pairs'
@@ -158,9 +156,8 @@ let NERDTreeQuitOnOpen=1
 " Disable right hand scroll bar
 set guioptions-=r
 
-" Vimtex
-let g:vimtex_quickfix_open_on_warning = 0
-
 " YCM
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
+" Vimtex
+let g:vimtex_compiler_latexmk = {'callback' : 0}
