@@ -13,6 +13,7 @@ Plug 'jeetsukumaran/vim-buffergator'
 Plug 'Valloric/YouCompleteMe'
 Plug 'rhysd/vim-clang-format'
 Plug 'jiangmiao/auto-pairs'
+Plug 'vim-syntastic/syntastic'
 
 call plug#end()
 
@@ -26,6 +27,8 @@ nnoremap <silent> <CR> :nohlsearch<CR>
 nnoremap <F5> :GundoToggle<CR>
 nnoremap <C-n> :NERDTree<CR>
 vnorem // y/<c-r>"<cr>
+
+set encoding=utf-8
 
 " Soft wrap
 set linebreak
@@ -52,11 +55,11 @@ set guioptions-=T                 " don't show toolbar
 set hidden                        " allows you to hide buffers with unsaved changes without being prompted
 set wildmenu                      " show options as list when switching buffers etc
 set wildmode=longest:full,full    " shell-like autocomplete to unambiguous portion
-set history=1000                  " longer search and command history (default is 20)
+" set history=1000                  " longer search and command history (default is 20)
 set scrolloff=3                   " start scrolling 3 lines before edge of viewport
 set backupdir=~/.vim/tmp/backup,. " keep backup files out of the way
 set directory=~/.vim/tmp/swap,.   " keep swap files out of the way
-set ttimeoutlen=50                " speed up O etc in the Terminal
+" set ttimeoutlen=50                " speed up O etc in the Terminal
 set virtualedit=block             " allow cursor to move where there is no text in visual block mode
 set showmatch                     " show matching brackets
 " set showcmd                       " extra info in command line
@@ -86,9 +89,6 @@ set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
 " Configure airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
 
 " all languages
 set shiftwidth=2                  " spaces per tab (when shifting)
@@ -186,3 +186,17 @@ autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 " Toggle auto formatting:
 nmap <Leader>C :ClangFormatAutoToggle<CR>
 
+" map to <Leader>cf in Rust code
+autocmd FileType rust nnoremap <buffer><Leader>cf :<C-u>RustFmt<CR>
+autocmd FileType rust vnoremap <buffer><Leader>cf :RustFmt<CR>
+
+" Syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+nmap <Leader>ln :lnext<CR>
+nmap <Leader>lf :lfirst<CR>
+nmap <Leader>lp :lprev<CR>
+nmap <Leader>lc :lclose<CR>
