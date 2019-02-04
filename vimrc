@@ -13,7 +13,9 @@ Plug 'jeetsukumaran/vim-buffergator'
 Plug 'Valloric/YouCompleteMe'
 Plug 'rhysd/vim-clang-format'
 Plug 'jiangmiao/auto-pairs'
+Plug 'vim-scripts/indentpython.vim'
 Plug 'vim-syntastic/syntastic'
+Plug 'nvie/vim-flake8'
 
 call plug#end()
 
@@ -55,11 +57,11 @@ set guioptions-=T                 " don't show toolbar
 set hidden                        " allows you to hide buffers with unsaved changes without being prompted
 set wildmenu                      " show options as list when switching buffers etc
 set wildmode=longest:full,full    " shell-like autocomplete to unambiguous portion
-" set history=1000                  " longer search and command history (default is 20)
+set history=1000                  " longer search and command history (default is 20)
 set scrolloff=3                   " start scrolling 3 lines before edge of viewport
 set backupdir=~/.vim/tmp/backup,. " keep backup files out of the way
 set directory=~/.vim/tmp/swap,.   " keep swap files out of the way
-" set ttimeoutlen=50                " speed up O etc in the Terminal
+set ttimeoutlen=50                " speed up O etc in the Terminal
 set virtualedit=block             " allow cursor to move where there is no text in visual block mode
 set showmatch                     " show matching brackets
 " set showcmd                       " extra info in command line
@@ -101,6 +103,8 @@ set backspace=indent,eol,start
 " Python
 autocmd FileType python set tabstop=4
 autocmd FileType python set shiftwidth=4
+autocmd FileType python set softtabstop=4
+autocmd FileType python set textwidth=79
 
 " C
 autocmd FileType c set tabstop=2
@@ -123,6 +127,7 @@ autocmd FileType rust set shiftwidth=4
 " automatic, language-dependent indentation, syntax coloring and other
 " functionality
 filetype plugin indent on
+let python_highlight_all=1
 syntax on
 
 let mapleader="`"
@@ -179,6 +184,9 @@ let g:clang_format#style_options = {
     \ "ConstructorInitializerAllOnOneLineOrOnePerLine" : "true",
     \ "IndentPPDirectives" : "AfterHash",
     \ "IndentWidth" : 2}
+
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " map to <Leader>cf in C++ code
 autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
