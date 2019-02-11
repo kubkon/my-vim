@@ -143,7 +143,12 @@ set shell=/bin/bash
 set nofoldenable    " disable folding
 let g:haskell_conceal_enumerations=0
 
-" EasyMotion
+" Auto-pairs
+let g:AutoPairsShortcutToggle = '<leader>p'
+let g:AutoPairsShortcutFastWrap = '<leader>e'
+let g:AutoPairShortcutJump = '<leader>n'
+
+""EasyMotion
 " Bi-directional find motion
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{label}`
@@ -201,7 +206,7 @@ autocmd FileType rust vnoremap <buffer><Leader>cf :RustFmt<CR>
 " Syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 nmap <Leader>ln :lnext<CR>
