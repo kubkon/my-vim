@@ -16,6 +16,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'nvie/vim-flake8'
+Plug 'mbbill/undotree'
 
 call plug#end()
 
@@ -26,9 +27,15 @@ cabbrev Wq wq
 
 " Hit return to clear search highlight. Thanks, Zdenek Sekera!
 nnoremap <silent> <CR> :nohlsearch<CR>
-nnoremap <F5> :GundoToggle<CR>
 nnoremap <C-n> :NERDTree<CR>
 vnorem // y/<c-r>"<cr>
+
+" Undotree
+nnoremap <F5> :UndotreeToggle<CR>
+if has("persistent_undo")
+  set undodir=~/.vim/tmp/undodir
+  set undofile
+endif
 
 set encoding=utf-8
 
@@ -205,7 +212,7 @@ autocmd FileType rust vnoremap <buffer><Leader>cf :RustFmt<CR>
 
 " Syntastic
 let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
@@ -213,3 +220,5 @@ nmap <Leader>ln :lnext<CR>
 nmap <Leader>lf :lfirst<CR>
 nmap <Leader>lp :lprev<CR>
 nmap <Leader>lc :lclose<CR>
+nmap <Leader>le :Errors<CR>
+
