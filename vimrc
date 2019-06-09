@@ -14,9 +14,18 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'rhysd/vim-clang-format'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-scripts/indentpython.vim'
-Plug 'vim-syntastic/syntastic'
 Plug 'nvie/vim-flake8'
 Plug 'mbbill/undotree'
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'Shougo/echodoc.vim'
 
 call plug#end()
 
@@ -107,26 +116,6 @@ set smarttab                      " <tab> key
 set autoindent
 set backspace=indent,eol,start
 
-" Python
-autocmd FileType python set tabstop=4
-autocmd FileType python set shiftwidth=4
-autocmd FileType python set softtabstop=4
-autocmd FileType python set textwidth=79
-
-" C
-autocmd FileType c set tabstop=2
-autocmd FileType c set shiftwidth=2
-
-" Cpp
-autocmd FileType cpp set tabstop=2
-autocmd FileType cpp set shiftwidth=2
-set cindent
-set cinoptions=g0
-
-" Swift
-autocmd FileType swift set tabstop=4
-autocmd FileType swift set shiftwidth=4
-
 " Rust
 autocmd FileType rust set tabstop=4
 autocmd FileType rust set shiftwidth=4
@@ -145,10 +134,6 @@ map <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " Fix some weird problem with $PATH mangling
 set shell=/bin/bash
-
-" Haskell specific
-set nofoldenable    " disable folding
-let g:haskell_conceal_enumerations=0
 
 " Auto-pairs
 let g:AutoPairsShortcutToggle = '<leader>p'
@@ -210,15 +195,41 @@ nmap <Leader>C :ClangFormatAutoToggle<CR>
 autocmd FileType rust nnoremap <buffer><Leader>cf :<C-u>RustFmt<CR>
 autocmd FileType rust vnoremap <buffer><Leader>cf :RustFmt<CR>
 
-" Syntastic
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+let g:rustfmt_autosave=1
 
-nmap <Leader>ln :lnext<CR>
-nmap <Leader>lf :lfirst<CR>
-nmap <Leader>lp :lprev<CR>
-nmap <Leader>lc :lclose<CR>
-nmap <Leader>le :Errors<CR>
+let g:deoplete#enable_at_startup=1
 
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
+    \ }
+
+function SetLSPShortcuts()
+  nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
+  nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
+  nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
+  nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
+  nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
+  nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
+  nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
+  nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
+  nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
+  nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
+endfunction()
+
+augroup LSP
+  autocmd!
+  autocmd FileType rust call SetLSPShortcuts()
+augroup END
+
+set signcolumn=yes
+
+set cmdheight=2
+let g:echodoc#enable_at_startup=1
+let g:echodoc#type = 'signature'
